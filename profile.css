@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    color: #444;
+    background-color: #f5f5f5;
+  }
+
+  header {
+    background-color: gray;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  nav {
+    background-color: gray;
+    height: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav li {
+    margin-right: 30px;
+  }
+  
+  nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  nav li:hover {
+    font-weight: bold;
+  }
+  
+  nav li.profile ul {
+    font-weight: normal;
+    display: none;
+    position: absolute;
+    background-color: gray;
+  }
+  
+  nav li.profile:hover ul {
+    display: block;
+  }
+  
+  nav li.profile ul li {
+    display: block;
+    margin: 0;
+  }
+  
+  nav li.profile ul li a {
+    display: block;
+    padding: 10px 20px;
+  }
+  
+  
+  /* Style untuk logo */
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  /* Style untuk tombol lokasi */
+  .location {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .location p {
+    margin-right: 10px;
+  }
+
+  .btn-location {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #777;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-location:hover {
+    background-color: #ddd;
+    color: #333;
+    border-color: #333;
+  }
+  
+
+/* Style untuk profile */  
+
+.profile-main-info {
+  padding: 5% 18% 2% 18%;
+	display: flex;
+	align-items: center;
+}
+
+.profile img {
+  width: 150px;
+	border-radius: 50%;
+	margin-right: 5%;
+}
+
+.profile-details {
+	flex: 1;
+}
+
+.profile p {
+	margin: 5px 0px;
+}
+
+.profile-secondary-info {
+  padding-left: 18%;
+}
+
+/* for button */
+button[type="submit"] {
+  color: black;
+  padding: 15px 25px;
+  border: 1px solid black;
+  border-radius: 40px;
+  cursor: pointer;
+  width: 100%;
+  height: fit-content;
+  box-shadow: 0px 5px #706e6e88;
+  display: block;
+  margin-bottom: 10%;
+}
+
+button[type="submit"]:hover {
+  background-color: #dbdbd9;
+}
+  
