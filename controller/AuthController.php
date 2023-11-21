@@ -5,17 +5,24 @@
     session_start();
     
     Class AuthController {
+        public function index() {
+            header('Location: ../index.php');
+        }
+
         private static $instance = null;
         private $conn;
+
         private function __construct() {
             $this->conn = Database::getInstance()->getConnection();
         }
+
         public static function getInstance() {
             if (!self::$instance) {
                 self::$instance = new AuthController();
             }
             return self::$instance;
         }
+        
         public function userLogin($username, $password) {
             if (empty($username)) {
                 $_SESSION['error'] = "Username can't be empty!";

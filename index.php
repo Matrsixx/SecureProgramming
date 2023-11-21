@@ -1,3 +1,13 @@
+<?php
+	require_once './core/Router.php';
+
+	// Ambil URI dari permintaan
+	$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+	// Handle request menggunakan Router
+	Router::handleRequest($url);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

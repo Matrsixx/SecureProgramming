@@ -6,19 +6,23 @@
   session_start();
 
   Class RegistrationController {
-      private static $instance = null;
-      private $conn;
-
-      private function __construct() {
-          $this->conn = Database::getInstance()->getConnection();
-      }
-
-      public static function getInstance() {
-        if (!self::$instance) {
-            self::$instance = new RegistrationController();
+        public function index() {
+            header('Location: ../views/register.php');
         }
-        return self::$instance;
-    }
+
+        private static $instance = null;
+        private $conn;
+
+        private function __construct() {
+            $this->conn = Database::getInstance()->getConnection();
+        }
+
+        public static function getInstance() {
+            if (!self::$instance) {
+                self::$instance = new RegistrationController();
+            }
+            return self::$instance;
+        }
 
       public function registerUser() {
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
