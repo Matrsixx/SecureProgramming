@@ -1,6 +1,6 @@
 <?php
-    require_once '../config/database.php';
-    require_once '../utils/encrypt.php';
+    require_once './../config/database.php';
+    require_once './../utils/encrypt.php';
 
     session_start();
     
@@ -27,10 +27,12 @@
                 $_SESSION['error'] = "Please Input Alphabet Only!";
                 return false;
             } else {
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $user = new User($username, $password);
-                if ($user->getId()) return $user;
+                $user = new User($username);
+                if ($user->getId()) {
+                    if (Encrypt::verifyPassword($password, $user->getPassword())) {
+                        return $user;
+                    }
+                }
                 return false;
             }
         }
