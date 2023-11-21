@@ -9,7 +9,7 @@
         exit();
     }
 
-    $user = RegistrationController::getInstance()->registerUser($_POST['username'], $_POST['password'], $_POST['confirm-password'], $_POST['email'], $_POST['role']);
+    $user = RegistrationController::getInstance()->registerUser();
     if ($user) {
         header('Location: ../index.php');
     } else {
