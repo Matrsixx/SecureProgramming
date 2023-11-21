@@ -15,7 +15,7 @@
         $_SESSION['user'] = $user;
         header('Location: ../views/home.php');
     } else {
-        $_SESSION['error_message'] = "Invalid Credential!";
+        $_SESSION['error'] = "Invalid Credential!";
         header('Location: ../index.php');
     }
 ?>
