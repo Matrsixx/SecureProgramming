@@ -23,8 +23,8 @@
             } else if (empty($password)) {
                 $_SESSION['error'] = "Password can't be empty!";
                 return false;
-            } else if (!preg_match("/^[a-zA-Z ]*$/", $username) && !preg_match("/^[a-zA-Z ]*$/", $password)) {
-                $_SESSION['error'] = "Please Input Alphabet Only!";
+            } else if (!preg_match("/^[a-zA-Z ]*$/", $username)) {
+                $_SESSION['error'] = "Username Must be Alphabet!";
                 return false;
             } else {
                 $user = new User($username);

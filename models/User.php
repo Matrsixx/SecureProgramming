@@ -43,9 +43,11 @@
         public function getRole() {
             return $this->role;
         }
+
         public function getPassword() {
             return $this->password;
         }
+
         public function getUser() {
             return $this->id ? $this : NULL;
         }

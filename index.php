@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Login Page</title>
-	<link rel="stylesheet" type="text/css" href="/styles/index.css">
+	<link rel="stylesheet" type="text/css" href="./styles/index.css">
 	<link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
 </head>
 <body style="background-image: url(https://cdn.discordapp.com/attachments/524461320314028052/1090666262247518310/Untitleddesign.gif); background-size: cover;">
@@ -11,14 +11,22 @@
 		<h2>Login</h2>
 		<?php
 			session_start();
-			if (isset($_SESSION['error_message'])) {
-				$error = $_SESSION['error_message'];
+			if (isset($_SESSION['error'])) {
+				$error = $_SESSION['error'];
 				echo "<p style='color: red;'>$error</p>";
 				echo "<br>";
-				unset($_SESSION['error_message']);
+				unset($_SESSION['error']);
 			} 
 		?>
-		<form action="/actions/doLogin.php" method="POST">
+		<?php
+			if (isset($_SESSION['success_message'])) {
+				$success = $_SESSION['success_message'];
+				echo "<p style='color: green;'>$success</p>";
+				echo "<br>";
+				unset($_SESSION['success_message']);
+			} 
+		?>
+		<form action="./actions/doLogin.php" method="POST">
 			<div class="user-box">
 				<input type="text" name="username" required>
 				<label>Username</label>
@@ -32,7 +40,7 @@
 			<br><br>
 			<a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a>
 			<br><br>
-			<span>Don't Have An Account? <a href="/views/register.php" class="forgot-button"><b>Register</b></a></span>
+			<span>Don't Have An Account? <a href="./views/register.php" class="forgot-button"><b>Register</b></a></span>
 			
 		</form>
 	</div>
