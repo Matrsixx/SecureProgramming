@@ -3,7 +3,7 @@
 <head>
 	<title>Register Page</title>
   	<link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="register.css">
+	<link rel="stylesheet" type="text/css" href="../style/register.css">
 </head>
 <body style="background-image: url(https://cdn.discordapp.com/attachments/524461320314028052/1090666262247518310/Untitleddesign.gif); background-size: cover;">
 	<div class="login-box">
@@ -13,7 +13,6 @@
 		<form action="RegisterPage.php" method="POST">
 
 			<?php 
-			include "Includes/db.php";
             $usernameerror = " ";
             $passerror = " ";
             $confirmpasserror = " ";

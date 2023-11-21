@@ -7,7 +7,7 @@
       ob_start();
 	?>
 	<title>Halaman Pembayaran</title>
-	<link rel="stylesheet" type="text/css" href="profile.css">
+	<link rel="stylesheet" type="text/css" href="../style/profile.css">
   <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
 </head>
 <body>
