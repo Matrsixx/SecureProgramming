@@ -21,7 +21,7 @@
                 $this->id = $row['id'];
                 $this->username = $row['username'];
                 $this->email = $row['email'];
-                // $this->role = $row['role'];
+                $this->role = $row['role'];
             } else {
                 $this->id = NULL;
             }
@@ -39,9 +39,10 @@
             return $this->email;
         }
 
-        // public function getRole() {
-        //     return $this->role;
-        // }
+        public function getRole() {
+            return $this->role;
+        }
+
         public function getUser() {
             return $this->id ? $this : NULL;
         }
