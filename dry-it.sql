@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 04:42 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Nov 21, 2023 at 07:26 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,6 +48,28 @@ INSERT INTO `tenant` (`id`, `name`, `address`, `Photo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactionheader`
+--
+
+CREATE TABLE `transactionheader` (
+  `id` int(255) NOT NULL,
+  `TransactionPrice` int(255) NOT NULL,
+  `TransactionDate` date NOT NULL,
+  `usersid` int(255) NOT NULL,
+  `tenantid` int(255) NOT NULL,
+  `TransactionProgress` smallint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transactionheader`
+--
+
+INSERT INTO `transactionheader` (`id`, `TransactionPrice`, `TransactionDate`, `usersid`, `tenantid`, `TransactionProgress`) VALUES
+(1, 20000, '2023-11-22', 7, 2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -78,6 +100,12 @@ ALTER TABLE `tenant`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transactionheader`
+--
+ALTER TABLE `transactionheader`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -92,6 +120,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `tenant`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `transactionheader`
+--
+ALTER TABLE `transactionheader`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
