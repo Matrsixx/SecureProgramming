@@ -35,7 +35,7 @@
             $_SESSION['count']++;
         } 
         
-        header('Location: ../views/Transaction.php');
+        header('Location: ../views/transaction.php');
 
     }else if(isset($_POST['pastsubmit']) && isset($id)){
         $Data = Transaction::getInstance()->getTransaction($_POST['pastsubmit'], $id);
@@ -47,9 +47,9 @@
             $_SESSION['count']++;
         }
       
-        header('Location: ../views/Transaction.php');
+        header('Location: ../views/transaction.php');
     }else{
-        header('Location: ../views/Transaction.php?error=1');
+        header('Location: ../views/transaction.php?error=1');
         $_SESSION['error_message'] = "login first!";
         exit();
     }

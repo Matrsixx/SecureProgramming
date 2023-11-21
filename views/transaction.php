@@ -21,7 +21,7 @@
         <div>
           <?php
               session_start();
-              for($i = 0; $i < $_SESSION['count']; $i++){       
+              for($i = 0; $i < $_SESSION['count']; $i++){    
             ?>
             <div class="laundry container">
               <div class="leftcolumn">
