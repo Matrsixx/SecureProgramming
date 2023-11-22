@@ -9,7 +9,7 @@
   <body>
     <!-- Header -->
     <header>
-      <?php include "../../includes/navbar.php" ?>
+      <?php include "../../template/navbar.template.php" ?>
     </header>
 
     <?php
