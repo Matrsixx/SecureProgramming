@@ -21,7 +21,7 @@
                     <a href="#">Profile</a>
                     <ul>
                     <li><a href="profile.php">View Profile</a></li>
-                    <li><a href="index.php">Logout</a></li>
+                    <li><a href="actions/doLogout.php">Logout</a></li>
                     </ul>
                 </li>
                 </ul>
