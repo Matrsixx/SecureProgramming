@@ -6,7 +6,7 @@
     include_once './../controller/AuthController.php';
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header('Location: ../views/login.php');
+        header('Location: ../index.php');
         exit();
     }
 
