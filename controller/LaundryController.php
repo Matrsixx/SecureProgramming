@@ -2,18 +2,21 @@
     require_once __DIR__ . "/../config/database.php";
     require_once __DIR__ . "/../models/Laundry.php";
     require_once __DIR__ . "/../models/Service.php";
+
     Class LaundryController {
         private static $instance = null;
         private $conn;
         private function __construct() {
             $this->conn = Database::getInstance()->getConnection();
         }
+
         public static function getInstance() {
             if (!self::$instance) {
                 self::$instance = new LaundryController();
             }
             return self::$instance;
         }
+
         public function getLaundry($param = '%') {
             $sql = "SELECT * FROM tenant WHERE name LIKE '$param'";
             $result = $this->conn->query($sql);
@@ -25,6 +28,7 @@
             }
             return $laundries;
         }
+
         public function getLaundryById($id) {
             $sql = "SELECT * FROM tenant WHERE id =?";
             $stmt = $this->conn->prepare($sql);
@@ -37,6 +41,7 @@
             }
             return NULL;
         }
+
         public function getLaundryByUserId($id) {
             $sql = "SELECT * FROM tenant WHERE user_id =?";
             $stmt = $this->conn->prepare($sql);
@@ -49,6 +54,7 @@
             }
             return NULL;
         }
+
         public function getService() {
             $sql = "SELECT * FROM laundryservice";
             $result = $this->conn->query($sql);
@@ -61,6 +67,7 @@
             }
             return NULL;
         }
+        
         public function getServicebyName($name) {
             $sql = "SELECT * FROM laundryservice WHERE servicename=?";
             $stmt = $this->conn->prepare($sql);
