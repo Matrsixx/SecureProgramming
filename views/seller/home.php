@@ -43,7 +43,7 @@
             } else {
                 throw new Exception("Laundry not found");
             }               
-            echo "<img src='$tenant_photo' alt='Laundry Image'>";
+            echo "<img src='../../storage/$tenant_photo' alt='Laundry Image'>";
             echo "<div class='laundry-details'>";
             echo "<h2>$tenant_name</h2>";
             echo "<p>$tenant_address</p>";
