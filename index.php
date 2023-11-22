@@ -43,7 +43,7 @@
 			<br>
 			<input id="button" type="submit" value="Submit" name="submit">
 			<br><br>
-			<a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a>
+			<!-- <a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a> -->
 			<br><br>
 			<span>Don't Have An Account? <a href="./views/register.php" class="forgot-button"><b>Register</b></a></span>
 			
