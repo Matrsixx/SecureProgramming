@@ -15,14 +15,24 @@
     <?php
       include_once "../controller/LaundryController.php";
       include_once "../models/Laundry.php";
-      session_start();
+      include "../utils/encrypt.php";
 
-      if(!isset($_SESSION['token'])){
+      session_start();
+        $x = new Encrypt();
+        $decodedData = $x->decodeJWT($_SESSION['token']);
+    
+        if(!isset($_SESSION['token']) || !$decodedData){
 
           $_SESSION['error'] = "Authentication Error!";
           header('Location: ../index.php');
           exit();
-      }
+        }
+
+        $token = Encrypt::decodeJWT($_SESSION['token']);
+        if($token->role !== "buyer"){
+          header('Location: seller/home.php');
+          exit();
+        }
     ?>
         
     <!-- Cari Laundry -->
@@ -55,7 +65,7 @@
 
               echo "<div class='laundry'>";
               echo "<a href='laundry-service.php?id=$id' style='text-decoration: none; color: inherit;'>";
-              echo "<img src='$photo' alt='Laundry Image'>";
+              echo "<img src='../storage/$photo' alt='Laundry Image'>";
               echo "<h3>$name</h3>";
               echo "<p>$address</p>";
               echo "</a>";
