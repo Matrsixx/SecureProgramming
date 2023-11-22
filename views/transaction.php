@@ -10,8 +10,13 @@
     <header>
       <?php
         include "../includes/navbar.php";
+        include "../utils/encrypt.php";
+        
         session_start();
-        if(!isset($_SESSION['token'])){
+        $x = new Encrypt();
+        $decodedData = $x->decodeJWT($_SESSION['token']);
+    
+        if(!isset($_SESSION['token']) || !$decodedData){
 
           $_SESSION['error'] = "Authentication Error!";
           header('Location: ../index.php');

@@ -12,15 +12,18 @@
       <?php
         include "../includes/navbar.php";
         require_once "../controller/LaundryController.php";
+        include "../utils/encrypt.php";
         session_start();
+        $x = new Encrypt();
+        $decodedData = $x->decodeJWT($_SESSION['token']);
 
-        if(!isset($_SESSION['token'])){
+        if(!isset($_SESSION['token']) || !$decodedData){
 
           $_SESSION['error'] = "Authentication Error!";
           header('Location: ../index.php');
           exit();
         }
-      ?>
+      ?>    
     </header>
 
     <section class="search">

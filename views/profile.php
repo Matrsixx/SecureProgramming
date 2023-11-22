@@ -5,7 +5,18 @@
       session_start(); 
       include_once "../utils/encrypt.php";
       include_once "../models/User.php";
-      include_once "../config/database.php";
+      include_once "../config/database.php";   
+      
+      $x = new Encrypt();
+      $decodedData = $x->decodeJWT($_SESSION['token']);
+  
+      if(!isset($_SESSION['token']) || !$decodedData){
+
+        $_SESSION['error'] = "Authentication Error!";
+        header('Location: ../index.php');
+        exit();
+      }
+    
       
       $x = new Encrypt();
       $decodedData = $x->decodeJWT($_SESSION['token']);
