@@ -4,14 +4,22 @@
     include_once '../utils/encrypt.php';
     include_once '../controller/RegistrationController.php';
 
+    session_start();
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ../views/register.php');
         exit();
     }
 
     $user = RegistrationController::getInstance()->registerUser();
+    // die(var_dump($user));
     if ($user) {
-        header('Location: ../index.php');
+        if ($user->getRole() === 'seller') {
+            $_SESSION['token'] = Encrypt::encodeJWT($user);
+            header('Location: ../views/seller/register-tenant.php');
+        } else {
+            header('Location: ../index.php');
+        }
     } else {
         header('Location: ../views/register.php');
     }

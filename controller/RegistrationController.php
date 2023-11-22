@@ -31,7 +31,7 @@
               if ($this->isDataValid($username, $password, $confirmPassword, $email, $role)) {
                   if ($this->doRegistration($username, $password, $email, $role)) {
                         $_SESSION['success_message'] =  "Registration Success!";
-                        return true;
+                        return new User($username);
                   } else {
                         $_SESSION['error'] = "Registration Failed!";
                         return false;
@@ -50,11 +50,6 @@
 
           if (!preg_match("/^[a-zA-Z ]*$/", $username)) {
             $_SESSION['error'] = "Username Must be Alphabet!";
-            return false;
-          }
-          
-          if (strlen($password) < 6 || !preg_match('/[A-Z]/', $password) || !preg_match('/[^a-zA-Z\d]/', $password)) {
-            $_SESSION['error'] = "Password Must be at least 6 character long / Must be at least 1 uppercase letter / Must be at least 1 special character!";
             return false;
           }
 
