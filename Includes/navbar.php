@@ -4,8 +4,8 @@
       
 <nav>
     <ul>
-        <li><a href="Home.php">Home</a></li>
-        <li><a href="./Transaction.php">Transaction</a></li>
+        <li><a href="home.php">Home</a></li>
+        <li><a href="./transaction.php">Transaction</a></li>
         <li class="profile">
         <a href="#">Profile</a>
         <ul>
@@ -60,7 +60,7 @@
                 var name = result.features[0].properties.name;
                 var street = result.features[0].properties.street;
                 // x.innerHTML = lat + ',' + lon + "<br> " + address;
-                console.log(lat + ',' + lon);
+                // console.log(lat + ',' + lon);
                 if (name == street || name == null) {
                 x.innerHTML = street;
                 } else {

@@ -13,25 +13,18 @@
     </header>
 
     <?php
-      $search = '%';
-      include "Includes/db.php";
+      include_once "../controller/LaundryController.php";
+      include_once "../models/Laundry.php";
+      session_start();
     ?>
         
     <!-- Cari Laundry -->
     <section class="search">
       <div class="container">
         <h2>Cari Laundry</h2>
-        <form action = "Home.php" method="GET">
+        <form action = "./../actions/searchLaundry.php" method="GET">
           <input type="text" id="name" name="name" placeholder="Masukkan nama laundry">
           <button>Cari</button>
-
-          <?php
-            if (isset($_GET['name'])) {
-              $name = $_GET['name'];
-              $search = '%' . $name . '%';
-            }
-          ?>
-
         </form>
       </div>
     </section>
@@ -42,26 +35,27 @@
         <h2>Laundry Terdekat</h2>
         <div class="laundries">
           <?php
-            $query = "SELECT * FROM tenant WHERE name LIKE '$search'";
+            if (!isset($_SESSION['laundries'])) {
+              $laundries = LaundryController::getInstance()->getLaundry();
+            } else {
+              $laundries = $_SESSION['laundries'];
+            }
+            foreach ($laundries as $item) {
+              $id = $item->getId();
+              $name = $item->getTenantName();
+              $address = $item->getTenantAddress();
+              $photo = $item->getTenantPhoto();
 
-            $select_all_query = mysqli_query($connection, $query);
-
-            while($row = mysqli_fetch_assoc($select_all_query)){
-              $tenant_id = $row['id'];
-              $tenant_name = $row['name'];
-              $tenant_address = $row['address'];
-              $tenant_photo = $row['Photo'];
-              $tenant_phone = $row['phone'];
+              echo "<div class='laundry'>";
+              echo "<a href='laundry-service.php?id=$id' style='text-decoration: none; color: inherit;'>";
+              echo "<img src='$photo' alt='Laundry Image'>";
+              echo "<h3>$name</h3>";
+              echo "<p>$address</p>";
+              echo "</a>";
+              echo "</div>";
+            }
+            unset($_SESSION['laundries']);
           ?>
-          <div class="laundry">
-            <a href="LaundryService.php?id=<?php echo base64_encode($tenant_id) ?>&name=<?php echo urlencode($tenant_name) ?>&address=<?php echo urlencode($tenant_address) ?>&photo=<?php echo urlencode($tenant_photo) ?>&phone=<?php echo urlencode($tenant_phone) ?>" style="text-decoration: none; color: inherit;">
-              <img src="<?php echo $tenant_photo ?>" alt="Laundry Image">
-              <h3><?php echo $tenant_name ?></h3>
-              <p><?php echo $tenant_address ?></p>
-            </a>
-          </div>
-
-          <?php } ?>
         </div>
       </div>
     </section>

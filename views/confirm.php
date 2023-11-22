@@ -9,220 +9,84 @@
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
 </head>
 <body>
-    <div id="logo">
-        <img src="https://cdn.discordapp.com/attachments/524461320314028052/1089862458090455070/Untitled-1.png"> 
-    </div>
-
-    <!-- <header>
-        <div class="logo">
-          <img src="https://media.discordapp.net/attachments/524461320314028052/1090298933110124737/logo2.png" alt="Dry-It Logo">
-        </div>
-        
-        <nav>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Transaction</a></li>
-            <li class="profile">
-              <a href="#">Profile</a>
-              <ul>
-                <li><a href="#">View Profile</a></li>
-                <li><a href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-	</header> -->
-
-
-    <h1 id="confirm-text">Confirmation Page </h1>
-
-    <div id="top">
+    <header>
         <?php
-            $tenant_photo =$_GET['photo'];
-            $tenant_name = $_GET['name'];
-            $tenant_address = $_GET['address'];
-            $tenant_phone = $_GET['phone'];
-            $order = urldecode($_GET['orderlist']);
+            include "../includes/navbar.php";
+            require_once "../controller/LaundryController.php";
+            require_once "../models/Laundry.php";
+            require_once "../utils/Encrypt.php";
+            session_start();
         ?>
-        <img src="<?php echo $tenant_photo ?>" alt="Laundry Image" id="phototop" >
+	</header>
+
+    <div class="bismilah">
+        <h1 id="confirm-text">Confirmation Page</h1>
+
+        <div id="top" class="laundry-info">
+            <?php
+                $laundry = LaundryController::getInstance()->getLaundryById($_GET['id']);
+                if ($laundry !== NULL) {
+                    $tenant_id = $laundry->getId();
+                    $tenant_photo = $laundry->getTenantPhoto();
+                    $tenant_name = $laundry->getTenantName();
+                    $tenant_address = $laundry->getTenantAddress();
+                    $tenant_phone = $laundry->getTenantPhone();
+                } else {
+                    throw new Exception("Laundry not found");
+                }               
+                echo "<img src='$tenant_photo' alt='Laundry Image'>";
+                echo "<div class='laundry-details'>";
+                echo "<h2>$tenant_name</h2>";
+                echo "<p>$tenant_address</p>";
+                echo "<p>$tenant_phone</p>";
+                echo "</div>";
+            ?>
+        </div>
+
+        <h1>Cart</h1>
+        <div class="line"></div>
         <div>
-            <div id="top-1">
-              <h2 id="top-p"><?php echo $tenant_name ?></h2>
-            </div>
-            <p id="top-p"><?php echo $tenant_phone ?></p>
-            <p id="top-p"><?php echo $tenant_address ?></p>
-        </div>
-        
-    </div>
-
-    <h1>User Information</h1>
-    <div class="line"></div>
-
-    <?php 
-        include "Includes/db.php"; 
-        session_start(); 
-        ob_start();
-    ?>
-
-    <div>
-        <?php
-            $id = $_SESSION['id'];
-            $query = "SELECT * FROM users WHERE id = $id;";
-
-            $select_all_query = mysqli_query($connection, $query);
-
-            while($row = mysqli_fetch_assoc($select_all_query)){
-                $name = $row['username'];
-                $email = $row['email'];
-        ?>
-        <p><strong><?php echo $name?></strong></p>
-        <p><?php echo $email?></p>
-    </div>
-    <?php } ?>
-
-    <h1>Add Ons</h1>
-    <div class="line"></div>
-    <br>
-    <br>
-    <label class="container">Pickup service
-        <input type="radio" checked="checked" name="radio">
-        <span class="checkmark"></span>
-    </label>
-    
-    <br>
-
-    <label class="container">Delivery service
-        <input type="radio" name="radio">
-        <span class="checkmark"></span>
-    </label>
-    
-      
-    
-    <h1>Price</h1>
-    <div class="line"></div>
-
-    <div>
-        <h3>Regular Wash</h3>
-
-        <?php 
-            $order = explode(",", $order);
-            $totalprice = 0;
-            $tenantid = 0;
-            foreach($order as $item){
-                $item = explode(":", $item);
-                $item_name = $item[0];
-                $item_quantity = $item[1];
-
-                $query = "SELECT * FROM laundryservices WHERE serviceName = '$item_name';";
-                $select_all_query = mysqli_query($connection, $query);
-
-                while($row = mysqli_fetch_assoc($select_all_query)){
-                    $item_price = $row['servicePrice'];
-                    $item_category = $row['serviceCategory'];
-                    $tenantid = $row['tenantID'];
-
-                    $totalprice += $item_price * $item_quantity;
-
-                    if($item_category == 0){
-                        echo "<div id='Price'>";
-                        echo "<p>$item_name</p>";
-                        echo "<p>$item_quantity</p>";
-                        echo "<p>Rp $item_price</p>";
-                        echo "</div>";
-                    }
-                }
-            } 
-        ?>
-
-        <h3>Express Wash</h3>
-
-        <?php 
-            foreach($order as $item){
-                $item = explode(":", $item);
-                $item_name = $item[0];
-                $item_quantity = $item[1];
-
-                $query = "SELECT * FROM laundryservices WHERE serviceName = '$item_name';";
-                $select_all_query = mysqli_query($connection, $query);
-
-                while($row = mysqli_fetch_assoc($select_all_query)){
-                    $item_price = $row['servicePrice'];
-                    $item_category = $row['serviceCategory'];
-
-                    $totalprice += $item_price * $item_quantity;
-
-                    if($item_category == 1){
-                        echo "<div id='Price'>";
-                        echo "<p>$item_name</p>";
-                        echo "<p>$item_quantity</p>";
-                        echo "<p>Rp $item_price</p>";
-                        echo "</div>";
-                    }
-                }
-            } 
-        ?>
-    </div>
-    <br><br>
-
-    <?php
-        $parameterString = $_SERVER['QUERY_STRING'];
-        $url = "Confirm.php?" . $parameterString;
-    ?>
-
-    <form action="<?php echo $url; ?>" method="POST">
-
-        <?php
-
-            // echo  "<script>console.log('haii')</script>";
-            
-            if(isset($_POST['submit'])){ 
-                
-                // echo "<script>console.log('test')</script>";
-
-                $tanggalHariIni = date('Y-m-d H:i:s');
-                $userid = $_SESSION['id'];
-                $query = "INSERT INTO transactionheader(transactiondate,transactionprice,transactionprogress,usersid,tenantid) VALUES ('$tanggalHariIni', '$totalprice', 0, '$userid', '$tenantid')";
-                mysqli_query($connection, $query);
-
-                $query = "SELECT * FROM transactionheader ORDER BY transactiondate DESC LIMIT 1;";
-                $select_all_query = mysqli_query($connection, $query);
-
-                if ($select_all_query && mysqli_num_rows($select_all_query) > 0) {
-                    $row = mysqli_fetch_assoc($select_all_query);
-                    $id = $row['TransactionId'];
-                }
-                   
-
+            <h3>Service</h3>
+            <?php 
+                $order = explode(",", $_GET['orderlist']);
+                $totalPrice = 0;
                 foreach($order as $item){
                     $item = explode(":", $item);
                     $item_name = $item[0];
                     $item_quantity = $item[1];
-    
-                    $query = "SELECT * FROM laundryservices WHERE serviceName = '$item_name';";
-                    $select_all_query = mysqli_query($connection, $query);
-    
-                    while($row = mysqli_fetch_assoc($select_all_query)){
-                        $item_price = $row['servicePrice'];
-                        $item_category = $row['serviceCategory'];
-                        $serviceid = $row['serviceID'];
-                        
-                        $query = "INSERT INTO transactiondetail(transactionid,tenantid,serviceid,quantity) VALUES ('$id', '$tenantid', '$serviceid', '$item_quantity')";
-                        mysqli_query($connection, $query);
+
+                    $service = LaundryController::getInstance()->getServicebyName($item_name);
+
+                    if ($service !== NULL) {
+                        $item_price = $service->getServicePrice();
+                        $tempPrice = $item_price * $item_quantity;
+                        $totalPrice += $tempPrice;
+                        echo "<p>$item_name ($item_quantity) @$item_price = $tempPrice</p><br>";
+                    } else {
+                        throw new Exception("Service not found");
                     }
-                } 
-                
+                }
+                echo "<br><p>Total Price: $totalPrice</p>";
+            ?>
+        </div>
+        <br><br>
 
+        <form action="../controller/TransactionController.php" method="POST">
 
-                header("Location: payment-validation.php?price=$totalprice");
-                exit;
-            }
-        ?>
+            <?php
+                $user_id = Encrypt::decodeJWT($_SESSION['token'])->user_id;
+            ?>
 
-        <button type="submit" value="submit" name="submit" id="s">Verify</button>
+            <input type="hidden" name="tenant_id" value="<?php echo $tenant_id; ?>">
+            <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-    </form>
-    
-    <br><br><br>
+            <button type="submit" value="submit" name="submit" id="s">Check Out</button>
+
+        </form>
+
+        <br><br><br>
+    </div>
 </body>
 
 <!-- <script>
