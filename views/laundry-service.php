@@ -12,6 +12,14 @@
       <?php
         include "../includes/navbar.php";
         require_once "../controller/LaundryController.php";
+        session_start();
+
+        if(!isset($_SESSION['token'])){
+
+          $_SESSION['error'] = "Authentication Error!";
+          header('Location: ../index.php');
+          exit();
+        }
       ?>
     </header>
 

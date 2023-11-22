@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Dry-It | Dashboard</title>
+    <title>Dry-It | Dashboard - Seller</title>
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
   </head>
@@ -16,13 +16,6 @@
       include_once "../controller/LaundryController.php";
       include_once "../models/Laundry.php";
       session_start();
-
-      if(!isset($_SESSION['token'])){
-
-          $_SESSION['error'] = "Authentication Error!";
-          header('Location: ../index.php');
-          exit();
-      }
     ?>
         
     <!-- Cari Laundry -->

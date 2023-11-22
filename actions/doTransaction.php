@@ -6,14 +6,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ../views/Transaction.php?error=1');
-        $_SESSION['error_message'] = "Wrong Request Method!";
-        exit();
-    }
-
-    if(!isset($_SESSION['token'])){
-
-        $_SESSION['error_message'] = "login first!";
-        header('Location: ../index.php');
+        $_SESSION['error'] = "Bad Request!";
         exit();
     }
 
@@ -49,7 +42,7 @@
         header('Location: ../views/transaction.php');
     }else{
         header('Location: ../views/transaction.php?error=1');
-        $_SESSION['error_message'] = "login first!";
+        $_SESSION['error'] = "Authentication Error!";
         exit();
     }
 ?>

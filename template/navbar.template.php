@@ -5,7 +5,6 @@
         <title>Dry-It</title>
         <link rel="stylesheet" href="Home.css">
         <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
-        @yield('head')
     </head>
     <body>
     <!-- Header -->
@@ -91,9 +90,7 @@
                 getLocation();
                 };
                 </script>
-
             </div>
         </header>
-    @yield('body')
     </body>
 </html>

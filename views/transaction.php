@@ -8,11 +8,30 @@
   </head>
   <body>
     <header>
-      <?php include "../includes/navbar.php" ?>
+      <?php
+        include "../includes/navbar.php";
+        session_start();
+        if(!isset($_SESSION['token'])){
+
+          $_SESSION['error'] = "Authentication Error!";
+          header('Location: ../index.php');
+          exit();
+        }
+      ?>
     </header>
 
     <div class="tab">
-    
+      
+      <?php
+        if (isset($_SESSION['error'])) {
+          $error = $_SESSION['error'];
+          echo "<p style='color: red;'>$error</p>";
+          echo "<br>";
+          unset($_SESSION['error']);
+          exit();
+        }
+      ?>
+
       <form action="../actions/doTransaction.php" method="POST">
         <button class="tablinks" id="lefttab" type="submit" value="Ongoing" name="ongoingsubmit"><h3>Ongoing Transaction</h3></button>
         <button class="tablinks" id="righttab" type="submit" value="Past" name="pastsubmit"><h3>Past Transaction</h3></button>

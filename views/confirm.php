@@ -16,6 +16,13 @@
             require_once "../models/Laundry.php";
             require_once "../utils/Encrypt.php";
             session_start();
+
+            if(!isset($_SESSION['token'])){
+
+                $_SESSION['error'] = "Authentication Error!";
+                header('Location: ../index.php');
+                exit();
+            }
         ?>
 	</header>
 
