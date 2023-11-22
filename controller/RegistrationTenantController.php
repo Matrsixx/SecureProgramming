@@ -2,6 +2,7 @@
 
   require_once '../config/database.php';
   require_once '../utils/encrypt.php';
+  require_once '../utils/helper.php';
 
   session_start();
 
@@ -27,9 +28,10 @@
               $user = new User($decodedToken->username);
 
               $tenantName = $_POST['tenant-name'];
-              $tenantAddress = $_POST['tenant-address'];
+              $tenantAddress = Helper::stripTags($_POST['tenant-address']);
               $tenantPhone = $_POST['tenant-phone'];
               $tenantPhoto = $_FILES['tenant-photo'];
+              $tenantPhoto['name'] = Helper::stripTags($tenantPhoto['name']);
 
               $registeredTenant = $this->isDataValid($tenantName, $tenantAddress, $tenantPhone, $tenantPhoto);
               if ($registeredTenant) {
@@ -74,6 +76,11 @@
               $_SESSION['error'] = "File type not allowed!";
               return false;
             }
+
+            if (strpos($tenantPhoto['name'], '/') !== false) {
+              $_SESSION['error'] = "File name not allowed!";
+              return false;
+          }
       
             $target_directory = "../storage/";
       
