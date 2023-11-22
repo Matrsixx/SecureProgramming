@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 10:06 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Nov 22, 2023 at 09:00 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,11 +61,12 @@ CREATE TABLE `tenant` (
 --
 
 INSERT INTO `tenant` (`id`, `user_id`, `name`, `address`, `Photo`, `phone`) VALUES
-(1, 9, 'New Laundry ', 'Jalan Kemanggisan ', 'https://media.discordapp.net/attachments/524461320314028052/1093157739561242695/20230228_154831.jpg?width=568&height=426', '0812341241'),
-(2, 9, 'New Laundry 1', 'Jalan Kemanggisan ', 'https://media.discordapp.net/attachments/524461320314028052/1093157739561242695/20230228_154831.jpg?width=568&height=426', '0812341412'),
-(3, 9, 'New Laundry 2', 'Jalan Kemanggisan ', 'https://media.discordapp.net/attachments/524461320314028052/1093157739561242695/20230228_154831.jpg?width=568&height=426', '0812341675'),
-(4, 9, 'New Laundry 3', 'Jalan Kemanggisan 123', 'https://media.discordapp.net/attachments/524461320314028052/1093157739561242695/20230228_154831.jpg?width=568&height=426', '0812341473'),
-(5, 9, 'New Laundry 10', 'Jalan Kemanggisan 123', 'https://media.discordapp.net/attachments/524461320314028052/1093157739561242695/20230228_154831.jpg?width=568&height=426', '0812341870');
+(1, 9, 'New Laundry ', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341241'),
+(2, 9, 'New Laundry 1', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341412'),
+(3, 9, 'New Laundry 2', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341675'),
+(4, 9, 'New Laundry 3', 'Jalan Kemanggisan 123', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341473'),
+(5, 9, 'New Laundry 10', 'Jalan Kemanggisan 123', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341870'),
+(7, 15, 'Apa aja lah ya', 'Apa aja lah ya', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812345678');
 
 -- --------------------------------------------------------
 
@@ -111,7 +112,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
 (7, 'felix', '$2y$10$1usESoM3cr4zYstRiNgs2um0NawyEC9hD2m.vx8gYy5lj1RwZ4kHu', 'felix@gmail.com', 'buyer'),
-(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller');
+(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller'),
+(14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller'),
+(15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller');
 
 --
 -- Indexes for dumped tables
@@ -158,7 +161,7 @@ ALTER TABLE `laundryservice`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transactionheader`
@@ -170,7 +173,7 @@ ALTER TABLE `transactionheader`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
