@@ -39,7 +39,13 @@
       <!-- <div id="tab1" class="tabcontent"> -->
         <div>
           <?php
-              session_start();
+              if(!isset($_SESSION['count'])){
+                $_SESSION['count'] = 0;
+              }
+
+              include_once '../utils/encrypt.php';
+              
+
               for($i = 0; $i < $_SESSION['count']; $i++){    
             ?>
             <div class="laundry container">
