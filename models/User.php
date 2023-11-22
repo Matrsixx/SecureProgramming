@@ -23,6 +23,7 @@
                 $this->email = $row['email'];
                 $this->password = $row['password'];
                 $this->role = $row['role'];
+                $this->photo = $row['photo'];
             } else {
                 $this->id = NULL;
             }
@@ -50,6 +51,10 @@
 
         public function getUser() {
             return $this->id ? $this : NULL;
+        }
+
+        public function getPhoto() {
+            return $this->photo;
         }
     }
 ?>
