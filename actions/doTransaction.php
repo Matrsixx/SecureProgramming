@@ -17,10 +17,9 @@
         exit();
     }
 
-    // $x = new Encrypt();
-    // $x -> decodeJWT($_SESSION['token']);
-    // $id = x->getId();
-    $id = 7;
+    $x = new Encrypt();
+    $decodedData = $x->decodeJWT($_SESSION['token']);
+    $id = $decodedData->user_id;
 
     $_SESSION['count'] = 0;
     if(isset($_POST['ongoingsubmit']) && isset($id)){
