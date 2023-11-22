@@ -11,6 +11,11 @@
 		<h2>Login</h2>
 		<?php
 			session_start();
+
+			if (isset($_SESSION['token'])) {
+				header("Location: ./views/home.php");
+			}
+
 			if (isset($_SESSION['error'])) {
 				$error = $_SESSION['error'];
 				echo "<p style='color: red;'>$error</p>";

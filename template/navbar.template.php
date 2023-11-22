@@ -5,11 +5,11 @@
 <nav>
     <ul>
         <li><a href="home.php">Home</a></li>
-        <li><a href="./transaction.php">Transaction</a></li>
+        <li><a href="../transaction.php">Transaction</a></li>
         <li class="profile">
         <a href="#">Profile</a>
         <ul>
-            <li><a href="profile.php">View Profile</a></li>
+            <li><a href="../profile.php">View Profile</a></li>
             <li><a href="../../actions/doLogout.php">Logout</a></li>
         </ul>
         </li>
