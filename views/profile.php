@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php 
-      include "Includes/db.php";
+  <?php
       session_start(); 
-      ob_start();
+      include_once "../utils/encrypt.php";
+      include_once "../models/User.php";
+      include_once "../config/database.php";
+      
+      $x = new Encrypt();
+      $decodedData = $x->decodeJWT($_SESSION['token']);
+      $username = $decodedData->username;
+      $role = $decodedData->role;
+
+      $user = new User($username);
+      $email = $user->getEmail();
 	?>
 	<title>Dry-It! | Profile</title>
 	<link rel="stylesheet" type="text/css" href="../styles/profile.css">
@@ -20,7 +29,7 @@
       <div class="profile-main-info">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Picture">
         <div class="profile-details">
-          <h2><?php echo $_SESSION['username']; ?></h2>
+          <h2><?php echo $username ?></h2>
         </div>
         <div class="action-button">
           <a href="UpdateProfile.php" style="text-decoration: none; color: inherit;">
@@ -32,16 +41,11 @@
       <div class="profile-secondary-info">
         <div class="profile-email">
           <h2>Email</h2>
-          <p><?php echo $_SESSION['email']; ?></p>
+          <p><?php echo $email ?></p>
         </div>
         <div class="profile-address">
-          <h2>Address</h2>
-          <p><?php 
-            $query = "SELECT address FROM users WHERE id = '".$_SESSION['id']."'";
-            $result = mysqli_query($connection, $query);
-            $row = mysqli_fetch_array($result);
-            echo $row['address'];
-          ?></p>
+          <h2>Role</h2>
+          <p><?php echo $role ?></p>
         </div>
       </div>
 		</section>
