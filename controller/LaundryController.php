@@ -1,7 +1,7 @@
 <?php
-    require_once "./../config/database.php";
-    require_once "./../models/Laundry.php";
-    require_once "./../models/Service.php";
+    require_once __DIR__ . "/../config/database.php";
+    require_once __DIR__ . "/../models/Laundry.php";
+    require_once __DIR__ . "/../models/Service.php";
     Class LaundryController {
         private static $instance = null;
         private $conn;
@@ -27,6 +27,18 @@
         }
         public function getLaundryById($id) {
             $sql = "SELECT * FROM tenant WHERE id =?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return new Laundry($row['id'], $row['name'], $row['address'], $row['Photo'], $row['phone']);
+            }
+            return NULL;
+        }
+        public function getLaundryByUserId($id) {
+            $sql = "SELECT * FROM tenant WHERE user_id =?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $id);
             $stmt->execute();
