@@ -3,62 +3,54 @@
   <head>
     <meta charset="UTF-8">
     <title>Dry-It | Dashboard - Seller</title>
-    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../../styles/home.css">
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090297730372472842/LogoSEcropped.png" type="image/x-icon">
   </head>
   <body>
     <!-- Header -->
     <header>
-      <?php include "../includes/navbar.php" ?>
+      <?php include "../../includes/navbar.php" ?>
     </header>
 
     <?php
-      include_once "../controller/LaundryController.php";
-      include_once "../models/Laundry.php";
+      include_once "../../utils/encrypt.php";
+      include_once "../../controller/LaundryController.php";
       session_start();
+
+      if(isset($_SESSION['token']) && Encrypt::decodeJWT($_SESSION['token'])){
+        $token = Encrypt::decodeJWT($_SESSION['token']);
+        if($token->role !== "seller"){
+          header('Location: ../home.php');
+          exit();
+        }
+      } else {
+        $_SESSION['error'] = "Authentication Error!";
+        header('Location: ../../index.php');
+        exit();
+      }
     ?>
-        
-    <!-- Cari Laundry -->
-    <section class="search">
-      <div class="container">
-        <h2>Cari Laundry</h2>
-        <form action = "./../actions/searchLaundry.php" method="GET">
-          <input type="text" id="name" name="name" placeholder="Masukkan nama laundry">
-          <button>Cari</button>
-        </form>
-      </div>
-    </section>
 
-    <!-- Laundry Terdekat -->
-    <section class="nearby">
-      <div class="container">
-        <h2>Laundry Terdekat</h2>
-        <div class="laundries">
-          <?php
-            if (!isset($_SESSION['laundries'])) {
-              $laundries = LaundryController::getInstance()->getLaundry();
+    <h2 style='margin: 50px;'>Laundry Saya</h2>
+    <div id="top" class="laundry-info">
+        <?php
+            $laundry = LaundryController::getInstance()->getLaundryByUserId($token->user_id);
+            if ($laundry !== NULL) {
+                $tenant_id = $laundry->getId();
+                $tenant_photo = $laundry->getTenantPhoto();
+                $tenant_name = $laundry->getTenantName();
+                $tenant_address = $laundry->getTenantAddress();
+                $tenant_phone = $laundry->getTenantPhone();
             } else {
-              $laundries = $_SESSION['laundries'];
-            }
-            foreach ($laundries as $item) {
-              $id = $item->getId();
-              $name = $item->getTenantName();
-              $address = $item->getTenantAddress();
-              $photo = $item->getTenantPhoto();
-
-              echo "<div class='laundry'>";
-              echo "<a href='laundry-service.php?id=$id' style='text-decoration: none; color: inherit;'>";
-              echo "<img src='$photo' alt='Laundry Image'>";
-              echo "<h3>$name</h3>";
-              echo "<p>$address</p>";
-              echo "</a>";
-              echo "</div>";
-            }
-            unset($_SESSION['laundries']);
-          ?>
-        </div>
-      </div>
-    </section>
+                throw new Exception("Laundry not found");
+            }               
+            echo "<img src='$tenant_photo' alt='Laundry Image'>";
+            echo "<div class='laundry-details'>";
+            echo "<h2>$tenant_name</h2>";
+            echo "<p>$tenant_address</p>";
+            echo "<p>$tenant_phone</p>";
+            echo "</div>";
+        ?>
+    </div>
 
   </body>
 </html>
