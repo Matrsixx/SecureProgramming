@@ -12,6 +12,16 @@
     </header>
 
     <div class="tab">
+      <?php 
+        session_start();
+        if(!isset($_SESSION['token'])){
+
+          $_SESSION['error_message'] = "login first!";
+          header('Location: ../index.php');
+          exit();
+      }
+      
+      ?>
     
       <form action="../actions/doTransaction.php" method="POST">
         <button class="tablinks" id="lefttab" type="submit" value="Ongoing" name="ongoingsubmit"><h3>Ongoing Transaction</h3></button>
@@ -20,7 +30,13 @@
       <!-- <div id="tab1" class="tabcontent"> -->
         <div>
           <?php
-              session_start();
+              if(!isset($_SESSION['count'])){
+                $_SESSION['count'] = 0;
+              }
+
+              include_once '../utils/encrypt.php';
+              
+
               for($i = 0; $i < $_SESSION['count']; $i++){    
             ?>
             <div class="laundry container">

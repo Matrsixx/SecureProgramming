@@ -52,6 +52,11 @@
             $_SESSION['error'] = "Username Must be Alphabet!";
             return false;
           }
+          
+          if (strlen($password) < 6 || !preg_match('/[A-Z]/', $password) || !preg_match('/[^a-zA-Z\d]/', $password)) {
+            $_SESSION['error'] = "Password Must be at least 6 character long / Must be at least 1 uppercase letter / Must be at least 1 special character!";
+            return false;
+          }
 
           if ($password !== $confirmPassword) {
             $_SESSION['error'] = "Password Must be Match!";
