@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 09:00 AM
+-- Generation Time: Nov 22, 2023 at 04:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.3.29
 
@@ -52,7 +52,7 @@ CREATE TABLE `tenant` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` text NOT NULL,
-  `Photo` varchar(255) NOT NULL,
+  `Photo` longtext NOT NULL,
   `phone` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,7 +66,9 @@ INSERT INTO `tenant` (`id`, `user_id`, `name`, `address`, `Photo`, `phone`) VALU
 (3, 9, 'New Laundry 2', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341675'),
 (4, 9, 'New Laundry 3', 'Jalan Kemanggisan 123', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341473'),
 (5, 9, 'New Laundry 10', 'Jalan Kemanggisan 123', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341870'),
-(7, 15, 'Apa aja lah ya', 'Apa aja lah ya', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812345678');
+(7, 15, 'Apa aja lah ya', 'Apa aja lah ya', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812345678'),
+(8, 16, 'Admin Tenant', 'Admin Tenant', '655e150f67c74_discord bot.png', '0812345678'),
+(9, 17, 'Tenant Ampas', 'alert(\'xss\')', '655e15d6d2f38_discord bot.png', '0812345678');
 
 -- --------------------------------------------------------
 
@@ -103,18 +105,21 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `role` varchar(10) DEFAULT NULL
+  `role` varchar(10) DEFAULT NULL,
+  `photo` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`) VALUES
-(7, 'felix', '$2y$10$1usESoM3cr4zYstRiNgs2um0NawyEC9hD2m.vx8gYy5lj1RwZ4kHu', 'felix@gmail.com', 'buyer'),
-(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller'),
-(14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller'),
-(15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `photo`) VALUES
+(7, 'felix', '$2y$10$1usESoM3cr4zYstRiNgs2um0NawyEC9hD2m.vx8gYy5lj1RwZ4kHu', 'felix@gmail.com', 'buyer', '655e2329b61c1_welcome-dribbble.gif'),
+(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller', NULL),
+(14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller', NULL),
+(15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller', NULL),
+(16, 'admin', '$2y$10$1usESoM3cr4zYstRiNgs2u9zpnaM.ByoI6UIH2BaCBqxTP/4P8eF.', 'admin@gmail.com', 'seller', NULL),
+(17, 'ampas', '$2y$10$1usESoM3cr4zYstRiNgs2uOlCqMHohSkMJuECgBK.lDUu6akoODu.', 'ampas@gmail.com', 'seller', NULL);
 
 --
 -- Indexes for dumped tables
@@ -161,7 +166,7 @@ ALTER TABLE `laundryservice`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `transactionheader`
@@ -173,7 +178,7 @@ ALTER TABLE `transactionheader`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
