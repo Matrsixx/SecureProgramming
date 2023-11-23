@@ -36,5 +36,41 @@
                 return false;
             }
         }
+        public function checkMaxAttempt($ip) {
+            $sql = "SELECT * FROM attempt WHERE ip = ? AND timestamp > (now() - interval 10 minute)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $ip);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows >= 5) return true;
+            return false;
+        }
+        public function createAttempt($ip) {
+            $sql = "INSERT INTO attempt (ip) VALUES (?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $ip);
+            $stmt->execute();
+        }
+        public function captchaValidation($token) {
+            $data = array(
+                'secret' => '0x4AAAAAAANj8c6gD3Mangzj', // Ganti dengan secret key Anda
+                'response' => $_POST['cf-turnstile-response'] // Ganti dengan nilai response yang ingin Anda kirim
+            );
+            $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $responseData = json_decode($response, true);
+            
+            if ($responseData['success'] === true) {
+                return true;
+            } else {
+                $_SESSION['error'] = "Captcha Validation Failed!";
+                return false;
+            }
+        }
     }
 ?>	

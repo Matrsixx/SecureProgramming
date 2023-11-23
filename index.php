@@ -4,6 +4,7 @@
 	<title>Login Page</title>
 	<link rel="stylesheet" type="text/css" href="./styles/index.css">
 	<link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body style="background-image: url(https://cdn.discordapp.com/attachments/524461320314028052/1090666262247518310/Untitleddesign.gif); background-size: cover;">
 	<div class="login-box">
@@ -41,7 +42,9 @@
 				<label>Password</label>
 			</div>
 			<br>
-			<input id="button" type="submit" value="Submit" name="submit">
+			<div class="cf-turnstile" data-sitekey="0x4AAAAAAANj8c6gD3Mangzj" data-theme="light" data-callback="onSuccess"></div>
+			<br>
+			<input id="button" type="submit" value="Submit" name="submit" disabled="true">
 			<br><br>
 			<!-- <a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a> -->
 			<br><br>
@@ -51,3 +54,17 @@
 	</div>
 </body>
 </html>
+
+<script>
+	function onSuccess(token) {
+		document.getElementById("button").disabled = false;
+
+		var tokenInput = document.createElement('input');
+		tokenInput.type = 'hidden';
+		tokenInput.name = 'cf-turnstile-response';
+		tokenInput.value = token;
+
+		const form = document.querySelector('form[action="./actions/doLogin.php"]');
+		form.appendChild(tokenInput);
+	}
+</script>

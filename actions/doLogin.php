@@ -10,9 +10,22 @@
         exit();
     }
 
+    if (AuthController::getInstance()->checkMaxAttempt($_SERVER['REMOTE_ADDR'])) {
+        $_SESSION['error'] = "Too Many Login Attempt!<br>Please Try Again Later!";
+        header('Location: ../index.php');
+        exit();
+    }
+
     $username = $_POST['username'];
     $password = $_POST['password'];
     $user = AuthController::getInstance()->userLogin($username, $password);
+    AuthController::getInstance()->createAttempt($_SERVER['REMOTE_ADDR']);
+
+    if (AuthController::getInstance()->captchaValidation($_POST['cf-turnstile-response'])) {
+        $_SESSION['error'] = "Captcha Validation Failed!";
+        header('Location: ../index.php');
+        exit();
+    }
 
     if ($user) {
         $_SESSION['token'] = Encrypt::encodeJWT($user);
