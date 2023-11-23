@@ -52,7 +52,7 @@ CREATE TABLE `tenant` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` text NOT NULL,
-  `Photo` longtext NOT NULL,
+  `photo` longtext NOT NULL,
   `phone` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,7 +60,7 @@ CREATE TABLE `tenant` (
 -- Dumping data for table `tenant`
 --
 
-INSERT INTO `tenant` (`id`, `user_id`, `name`, `address`, `Photo`, `phone`) VALUES
+INSERT INTO `tenant` (`id`, `user_id`, `name`, `address`, `photo`, `phone`) VALUES
 (1, 9, 'New Laundry ', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341241'),
 (2, 9, 'New Laundry 1', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341412'),
 (3, 9, 'New Laundry 2', 'Jalan Kemanggisan ', '655db3ab83713_2538641266d71672538cb15ca8cd07d4.jpeg', '0812341675'),
@@ -115,11 +115,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `photo`) VALUES
 (7, 'felix', '$2y$10$1usESoM3cr4zYstRiNgs2um0NawyEC9hD2m.vx8gYy5lj1RwZ4kHu', 'felix@gmail.com', 'buyer', '655e2329b61c1_welcome-dribbble.gif'),
-(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller', NULL),
-(14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller', NULL),
-(15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller', NULL),
-(16, 'admin', '$2y$10$1usESoM3cr4zYstRiNgs2u9zpnaM.ByoI6UIH2BaCBqxTP/4P8eF.', 'admin@gmail.com', 'seller', NULL),
-(17, 'ampas', '$2y$10$1usESoM3cr4zYstRiNgs2uOlCqMHohSkMJuECgBK.lDUu6akoODu.', 'ampas@gmail.com', 'seller', NULL);
+(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(16, 'admin', '$2y$10$1usESoM3cr4zYstRiNgs2u9zpnaM.ByoI6UIH2BaCBqxTP/4P8eF.', 'admin@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(17, 'ampas', '$2y$10$1usESoM3cr4zYstRiNgs2uOlCqMHohSkMJuECgBK.lDUu6akoODu.', 'ampas@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif');
 
 --
 -- Indexes for dumped tables

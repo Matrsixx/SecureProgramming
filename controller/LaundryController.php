@@ -23,7 +23,7 @@
             $laundries = [];
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $laundries[] = new Laundry($row['id'], $row['name'], $row['address'], $row['Photo'], $row['phone']);
+                    $laundries[] = new Laundry($row['id'], $row['name'], $row['address'], $row['photo'], $row['phone']);
                 }
             }
             return $laundries;
@@ -37,7 +37,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                return new Laundry($row['id'], $row['name'], $row['address'], $row['Photo'], $row['phone']);
+                return new Laundry($row['id'], $row['name'], $row['address'], $row['photo'], $row['phone']);
             }
             return NULL;
         }
@@ -50,7 +50,7 @@
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
-                return new Laundry($row['id'], $row['name'], $row['address'], $row['Photo'], $row['phone']);
+                return new Laundry($row['id'], $row['name'], $row['address'], $row['photo'], $row['phone']);
             }
             return NULL;
         }

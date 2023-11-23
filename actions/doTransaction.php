@@ -22,7 +22,7 @@
 
         
         while($row = $Data->fetch_assoc()){
-            $temp = array($row['TransactionDate'], $row['TransactionPrice'], $row['name'], $row['address'], $row['Photo'], $row['phone']);    
+            $temp = array($row['TransactionDate'], $row['TransactionPrice'], $row['name'], $row['address'], $row['photo'], $row['phone']);    
             array_push($_SESSION['Data'], $temp);
             $_SESSION['count']++;
         } 
@@ -34,7 +34,7 @@
         $_SESSION['Data'] = array();
 
         while($row = $Data->fetch_assoc()){
-            $temp = array($row['TransactionDate'], $row['TransactionPrice'], $row['name'], $row['address'], $row['Photo'], $row['phone']);    
+            $temp = array($row['TransactionDate'], $row['TransactionPrice'], $row['name'], $row['address'], $row['photo'], $row['phone']);    
             array_push($_SESSION['Data'], $temp);
             $_SESSION['count']++;
         }

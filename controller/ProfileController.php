@@ -77,7 +77,7 @@
     }
     
       private function doUploadProfilePhoto($profilePhoto, $userId) {
-          $query = "UPDATE users SET photo = ? WHERE id = ?";
+          $query = "UPDATE users SET Photo = ? WHERE id = ?";
           $stmt = $this->conn->prepare($query);
           $stmt->bind_param('si', $profilePhoto, $userId);
           $stmt->execute();
