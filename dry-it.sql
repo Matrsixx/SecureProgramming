@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 04:54 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Dec 11, 2023 at 08:21 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,48 @@ SET time_zone = "+00:00";
 --
 -- Database: `dry-it`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attempt`
+--
+
+CREATE TABLE `attempt` (
+  `id` int(11) NOT NULL,
+  `ip` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `attempt`
+--
+
+INSERT INTO `attempt` (`id`, `ip`, `timestamp`) VALUES
+(1, '192.168.1.1', '2023-11-23 13:05:54'),
+(2, '::1', '2023-11-23 13:15:08'),
+(3, '::1', '2023-11-23 13:17:19'),
+(4, '::1', '2023-11-23 13:17:24'),
+(5, '::1', '2023-11-23 13:17:26'),
+(7, '::1', '2023-11-23 13:17:33'),
+(8, '::1', '2023-11-23 13:19:14'),
+(9, '::1', '2023-11-23 13:19:16'),
+(10, '::1', '2023-11-23 13:19:17'),
+(11, '::1', '2023-11-23 13:19:19'),
+(12, '::1', '2023-11-23 13:19:20'),
+(13, '::1', '2023-11-23 13:42:02'),
+(14, '::1', '2023-11-23 13:53:59'),
+(15, '::1', '2023-11-23 14:03:57'),
+(16, '::1', '2023-11-23 14:05:45'),
+(17, '::1', '2023-11-23 14:06:02'),
+(18, '::1', '2023-11-23 14:06:25'),
+(24, '::1', '2023-12-11 06:55:04'),
+(25, '::1', '2023-12-11 06:55:19'),
+(31, '::1', '2023-12-11 07:12:52'),
+(32, '::1', '2023-12-11 07:13:37'),
+(33, '::1', '2023-12-11 07:20:06'),
+(34, '::1', '2023-12-11 07:20:14'),
+(35, '::1', '2023-12-11 07:20:19');
 
 -- --------------------------------------------------------
 
@@ -40,6 +82,25 @@ CREATE TABLE `laundryservice` (
 INSERT INTO `laundryservice` (`id`, `servicename`, `serviceprice`) VALUES
 (1, 'cuci sekarang', 5000),
 (2, 'cuci besok', 10000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `secret`
+--
+
+CREATE TABLE `secret` (
+  `id` int(11) NOT NULL,
+  `value` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `secret`
+--
+
+INSERT INTO `secret` (`id`, `value`, `type`) VALUES
+(1, '0x4AAAAAAANj8UN97ZQ7tSm6eHdNWqUSJ5A', 'cloudflare_secret');
 
 -- --------------------------------------------------------
 
@@ -115,20 +176,33 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `role`, `photo`) VALUES
 (7, 'felix', '$2y$10$1usESoM3cr4zYstRiNgs2um0NawyEC9hD2m.vx8gYy5lj1RwZ4kHu', 'felix@gmail.com', 'buyer', '655e2329b61c1_welcome-dribbble.gif'),
-(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(9, 'sokrates', '$2y$10$1usESoM3cr4zYstRiNgs2unK.MS5nSb44zeJEea4zgh5Nn58/4PD2', 'sokrates@gmail.com', 'seller', '655f4c5f91176_nyonteq.png'),
 (14, 'phan', '$2y$10$1usESoM3cr4zYstRiNgs2uWBX.ojeBZanas9AQzoxgmm8Bbk5zmOq', 'phan@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
 (15, 'stephan', '$2y$10$1usESoM3cr4zYstRiNgs2uWAsEpa6MHOToXvGFgj2rtO7urlqy4n.', 'stephan@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
 (16, 'admin', '$2y$10$1usESoM3cr4zYstRiNgs2u9zpnaM.ByoI6UIH2BaCBqxTP/4P8eF.', 'admin@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
-(17, 'ampas', '$2y$10$1usESoM3cr4zYstRiNgs2uOlCqMHohSkMJuECgBK.lDUu6akoODu.', 'ampas@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif');
+(17, 'ampas', '$2y$10$1usESoM3cr4zYstRiNgs2uOlCqMHohSkMJuECgBK.lDUu6akoODu.', 'ampas@gmail.com', 'seller', '655e2329b61c1_welcome-dribbble.gif'),
+(18, 'bikinbaru', '$2y$10$1usESoM3cr4zYstRiNgs2uzx9KMQP.c7h4VR3cD2LpZEFkaBbrwfW', 'bikinbaru@gmail.com', 'buyer', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `attempt`
+--
+ALTER TABLE `attempt`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `laundryservice`
 --
 ALTER TABLE `laundryservice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `secret`
+--
+ALTER TABLE `secret`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -157,10 +231,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `attempt`
+--
+ALTER TABLE `attempt`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
 -- AUTO_INCREMENT for table `laundryservice`
 --
 ALTER TABLE `laundryservice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `secret`
+--
+ALTER TABLE `secret`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tenant`
@@ -178,7 +264,7 @@ ALTER TABLE `transactionheader`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
