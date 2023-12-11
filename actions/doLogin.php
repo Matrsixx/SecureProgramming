@@ -21,8 +21,7 @@
     $user = AuthController::getInstance()->userLogin($username, $password);
     AuthController::getInstance()->createAttempt($_SERVER['REMOTE_ADDR']);
 
-    if (AuthController::getInstance()->captchaValidation($_POST['cf-turnstile-response'])) {
-        $_SESSION['error'] = "Captcha Validation Failed!";
+    if (!AuthController::getInstance()->captchaValidation($_POST['cf-turnstile-response'])) {
         header('Location: ../index.php');
         exit();
     }

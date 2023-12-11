@@ -52,9 +52,10 @@
             $stmt->execute();
         }
         public function captchaValidation($token) {
+            $secret = $this->conn->query("SELECT value FROM secret WHERE type = 'cloudflare_secret'")->fetch_assoc()['value'];
             $data = array(
-                'secret' => '0x4AAAAAAANj8c6gD3Mangzj', // Ganti dengan secret key Anda
-                'response' => $_POST['cf-turnstile-response'] // Ganti dengan nilai response yang ingin Anda kirim
+                'secret' => $secret,
+                'response' => $_POST['cf-turnstile-response']
             );
             $url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
             $ch = curl_init($url);
