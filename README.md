@@ -12,6 +12,6 @@ Seller:
 
 Buyer:
   
-  User: felix
+  User: bikinbaru
   
-  Password: felix123
+  Password: Bikinbaru123!
