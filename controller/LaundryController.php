@@ -18,8 +18,11 @@
         }
 
         public function getLaundry($param = '%') {
-            $sql = "SELECT * FROM tenant WHERE name LIKE '$param'";
-            $result = $this->conn->query($sql);
+            $sql = "SELECT * FROM tenant WHERE name LIKE ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $param);
+            $stmt->execute();
+            $result = $stmt->get_result();
             $laundries = [];
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
