@@ -47,7 +47,16 @@
           if ($profilePhoto['size'] > 10 * 1000 * 1000) {
             $_SESSION['error'] = "File is too big!";
             return false;
-          } 
+          }
+
+          $allowed_name_extensions = ["jpg", "jpeg", "png", "gif"]; 
+
+          $fileName = explode(".", $profilePhoto['name']);
+          
+          if (!in_array(end($fileName), $allowed_name_extensions)) {
+            $_SESSION['error'] = "File name not allowed!";
+            return false;
+          }
 
           $allowed_extensions = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
 
