@@ -88,14 +88,24 @@
             <?php
                 $user_id = Encrypt::decodeJWT($_SESSION['token'])->user_id;
             ?>
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
             <input type="hidden" name="tenant_id" value="<?php echo $tenant_id; ?>">
-            <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
-            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+
+            <input type="hidden" name="order_list" value="<?php echo $_GET['orderlist']; ?>">
 
             <button type="submit" value="submit" name="submit" id="s">Check Out</button>
 
         </form>
+        
+
+        <?php 
+            if(isset($_SESSION['error'])){
+                echo "<p>" . $_SESSION['error'] . "</p>"; 
+                unset($_SESSION['error']);
+            }
+        
+        ?>
 
         <br><br><br>
     </div>
