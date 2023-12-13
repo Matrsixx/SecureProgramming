@@ -6,6 +6,9 @@
       include_once "../utils/encrypt.php";
       include_once "../models/User.php";
       include_once "../config/database.php";   
+      include_once "../utils/helper.php";
+
+      Helper::xFrameRemove();
       
       $x = new Encrypt();
       $decodedData = $x->decodeJWT($_SESSION['token']);

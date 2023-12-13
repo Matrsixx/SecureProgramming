@@ -1,3 +1,9 @@
+<?php
+    require_once './../utils/helper.php';
+
+    Helper::xFrameRemove();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

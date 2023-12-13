@@ -3,6 +3,9 @@
 		if (isset($_SESSION['token'])) {
 			header("Location: ./views/home.php");
 		}
+
+		require_once './../utils/helper.php';
+		Helper::xFrameRemove();
 ?>
 
 <!DOCTYPE html>

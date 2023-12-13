@@ -3,6 +3,9 @@
     include_once '../config/database.php';
     include_once '../models/Transactions.php';
     include_once '../utils/encrypt.php';
+    include_once '../utils/helper.php';
+
+    Helper::xFrameRemove();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ../views/Transaction.php?error=1');

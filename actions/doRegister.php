@@ -3,6 +3,9 @@
     include_once '../models/User.php';
     include_once '../utils/encrypt.php';
     include_once '../controller/RegistrationController.php';
+    include_once '../utils/helper.php';
+
+    Helper::xFrameRemove();
 
     session_start();
 
