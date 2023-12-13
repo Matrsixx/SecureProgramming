@@ -44,12 +44,24 @@
 
       private function isDataValid($profilePhoto) {
         if ($profilePhoto['size'] > 0) {
+          $allowed_extensions = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
+
+          $finfo = finfo_open(FILEINFO_MIME_TYPE);
+          $mime = finfo_file($finfo, $profilePhoto['tmp_name']);
+          
+          if (!in_array($mime, $allowed_extensions)) {
+            $_SESSION['error'] = "File type not allowed!";
+            return false;
+          }
+   
+          finfo_close($finfo);
+        
           if ($profilePhoto['size'] > 10 * 1000 * 1000) {
             $_SESSION['error'] = "File is too big!";
             return false;
           }
 
-          $allowed_name_extensions = ["jpg", "jpeg", "png", "gif"]; 
+          $allowed_name_extensions = ["jpg", "jpeg", "png", "gif", "JPG", "JPEG", "PNG", "GIF"]; 
 
           $fileName = explode(".", $profilePhoto['name']);
           
@@ -57,8 +69,6 @@
             $_SESSION['error'] = "File name not allowed!";
             return false;
           }
-
-          $allowed_extensions = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
 
           if (!in_array($profilePhoto['type'], $allowed_extensions)) {
             $_SESSION['error'] = "File type not allowed!";
@@ -69,6 +79,7 @@
             $_SESSION['error'] = "File name not allowed!";
             return false;
         }
+          
     
           $target_directory = "../storage/";
     
