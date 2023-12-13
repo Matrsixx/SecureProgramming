@@ -2,6 +2,9 @@
     require_once __DIR__ . "/../config/database.php";
     require_once __DIR__ . "/../models/Laundry.php";
     require_once __DIR__ . "/../models/Service.php";
+    require_once __DIR__ . "/../utils/helper.php";
+
+    Helper::xFrameRemove();
 
     Class LaundryController {
         private static $instance = null;

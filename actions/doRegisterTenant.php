@@ -3,6 +3,9 @@
     include_once '../models/User.php';
     include_once '../utils/encrypt.php';
     include_once '../controller/RegistrationTenantController.php';
+    include_once '../utils/helper.php';
+
+    Helper::xFrameRemove();
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ../views/register-tenant.php');

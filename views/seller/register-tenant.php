@@ -1,5 +1,9 @@
 <?php
 		session_start();
+
+		require_once './../../utils/helper.php';
+
+		Helper::xFrameRemove();
 ?>
 
 <!DOCTYPE html>

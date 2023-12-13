@@ -4,6 +4,8 @@
   require_once '../utils/encrypt.php';
   require_once '../utils/helper.php';
 
+  Helper::xFrameRemove();
+
   session_start();
 
   Class RegistrationTenantController {
@@ -71,6 +73,25 @@
             } 
 
             $allowed_extensions = ["image/gif", "image/jpeg", "image/jpg", "image/png"];
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = finfo_file($finfo, $tenantPhoto['tmp_name']);
+            
+            if (!in_array($mime, $allowed_extensions)) {
+              $_SESSION['error'] = "File type not allowed!";
+              return false;
+            }
+    
+            finfo_close($finfo);
+
+            $allowed_name_extensions = ["jpg", "jpeg", "png", "gif", "JPG", "JPEG", "PNG", "GIF"]; 
+
+            $fileName = explode(".", $tenantPhoto['name']);
+            
+            if (!in_array(end($fileName), $allowed_name_extensions)) {
+              $_SESSION['error'] = "File name not allowed!";
+              return false;
+            }
 
             if (!in_array($tenantPhoto['type'], $allowed_extensions)) {
               $_SESSION['error'] = "File type not allowed!";

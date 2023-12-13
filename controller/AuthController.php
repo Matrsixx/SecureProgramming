@@ -1,6 +1,9 @@
 <?php
     require_once './../config/database.php';
     require_once './../utils/encrypt.php';
+    require_once './../utils/helper.php';
+
+    Helper::xFrameRemove();
 
     session_start();
     

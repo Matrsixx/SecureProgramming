@@ -3,6 +3,9 @@
     require_once('../models/Transactions.php');
     require_once "../utils/Encrypt.php";
     require_once "LaundryController.php";
+    require_once "../utils/helper.php";
+
+    Helper::xFrameRemove();
 
     session_start();   
     $conn = Database::getInstance()->getConnection();

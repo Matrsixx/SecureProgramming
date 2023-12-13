@@ -3,6 +3,8 @@
     include_once '../models/Laundry.php';
     include_once '../controller/LaundryController.php';
     include_once '../utils/helper.php';
+    
+    Helper::xFrameRemove();
 
     session_start();
 
