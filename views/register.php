@@ -1,10 +1,21 @@
 <?php
+		require_once './../utils/encrypt.php';
+
 		session_start();
+
 		if (isset($_SESSION['token'])) {
-			header("Location: ./views/home.php");
+			$token = $_SESSION['token'];
+			$decodedToken = Encrypt::decodeJWT($token);
+
+			if ($decodedToken->role === 'buyer') {
+				header('Location: ../views/buyer/home.php');
+			} else if ($decodedToken->role === 'seller') {
+				header('Location: ../views/seller/home.php');
+			}
 		}
 
 		require_once './../utils/helper.php';
+		
 		Helper::xFrameRemove();
 ?>
 

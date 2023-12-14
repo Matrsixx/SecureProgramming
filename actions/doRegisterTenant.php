@@ -17,8 +17,6 @@
     if ($tenant) {
         header('Location: ../views/seller/home.php');
     } else {
-        header('Location: ../views/register.php');
-        unset($_SESSION['token']);
-        session_destroy();
+        header('Location: ../views/seller/register-tenant.php');
     }
 ?>

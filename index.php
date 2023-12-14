@@ -18,10 +18,19 @@
 		<img src="https://cdn.discordapp.com/attachments/524461320314028052/1090665918171971675/Dry-It_Logo_Cadangan_cropped.png" alt="logo" srcset="" class="avatar">
 		<h2>Login</h2>
 		<?php
+			require_once './utils/encrypt.php';
+			
 			session_start();
 
 			if (isset($_SESSION['token'])) {
-				header("Location: ./views/home.php");
+				$token = $_SESSION['token'];
+				$decodedToken = Encrypt::decodeJWT($token);
+
+				if ($decodedToken->role === 'buyer') {
+					header('Location: ./views/buyer/home.php');
+				} else if ($decodedToken->role === 'seller') {
+					header('Location: ./views/seller/home.php');
+				}
 			}
 
 			if (isset($_SESSION['error'])) {
