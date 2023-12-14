@@ -2,9 +2,6 @@
 
   require_once '../config/database.php';
   require_once '../utils/encrypt.php';
-  require_once '../utils/helper.php';
-
-  Helper::xFrameRemove();
 
   session_start();
 
@@ -23,10 +20,8 @@
         return self::$instance;
     }
 
-    
-
       public function registerUser() {
-          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               $username = $_POST['username'];
               $password = $_POST['password'];
               $confirmPassword = $_POST['confirm-password'];
@@ -36,7 +31,7 @@
               if ($this->isDataValid($username, $password, $confirmPassword, $email, $role)) {
                   if ($this->doRegistration($username, $password, $email, $role)) {
                         $_SESSION['success_message'] =  "Registration Success!";
-                        return new User($username);
+                        return true;
                   } else {
                         $_SESSION['error'] = "Registration Failed!";
                         return false;
@@ -58,19 +53,6 @@
             return false;
           }
 
-          if (strlen($password) < 6) {
-            $_SESSION['error'] = "Password Must be at least 6 character long!";
-            return false;
-          }
-
-          if (!preg_match('/[A-Z]/', $password) ||
-          !preg_match('/[a-z]/', $password) ||
-          !preg_match('/[0-9]/', $password) ||
-          !preg_match('/[!@#$%^&*()_+{}|:<>?~]/', $password)) {
-            $_SESSION['error'] = "Password Must be at least 1 uppercase letter / Must be at least 1 special character! / Must be at least 1 number!";
-            return false;
-          }
-
           if ($password !== $confirmPassword) {
             $_SESSION['error'] = "Password Must be Match!";
             return false;
@@ -86,24 +68,8 @@
               return false;
           }
 
-          if ($this->isUsernameTaken($username)) {
-            $_SESSION['error'] = "Username is already taken!";
-            return false;
-          }
-
           return true;
       }
-
-      private function isUsernameTaken($username) {
-        $stmt = $this->conn->prepare("SELECT id FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
-        $count = $stmt->num_rows;
-        $stmt->close();
-
-        return $count > 0;
-    }
 
       private function doRegistration($username, $password, $email, $role) {
             $encPassword = Encrypt::encryptPassword($password);
