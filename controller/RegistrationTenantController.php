@@ -119,6 +119,9 @@
               $_SESSION['error'] = "File failed to upload!";
               return false;
             }
+          } else {
+            $_SESSION['error'] = "Photo must be uploaded with size more than 0!";
+            return false;
           }
       }
       private function isTenantNameTaken($tenantName) {
