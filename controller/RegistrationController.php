@@ -23,6 +23,8 @@
         return self::$instance;
     }
 
+    
+
       public function registerUser() {
           if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               $username = $_POST['username'];
@@ -84,8 +86,24 @@
               return false;
           }
 
+          if ($this->isUsernameTaken($username)) {
+            $_SESSION['error'] = "Username is already taken!";
+            return false;
+          }
+
           return true;
       }
+
+      private function isUsernameTaken($username) {
+        $stmt = $this->conn->prepare("SELECT id FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows;
+        $stmt->close();
+
+        return $count > 0;
+    }
 
       private function doRegistration($username, $password, $email, $role) {
             $encPassword = Encrypt::encryptPassword($password);
