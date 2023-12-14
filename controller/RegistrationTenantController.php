@@ -51,6 +51,10 @@
       }
 
       private function isDataValid($tenantName, $tenantAddress, $tenantPhone, $tenantPhoto) {
+          if ($this->isTenantNameTaken($tenantName)) {
+            $_SESSION['error'] = "Tenant Name is already taken!";
+            return false;
+          }
           if (empty($tenantName) || empty($tenantAddress) || empty($tenantPhone) || empty($tenantPhoto)) {
             $_SESSION['error'] = "All Field Must be Filled!";
             return false;
@@ -117,6 +121,16 @@
             }
           }
       }
+      private function isTenantNameTaken($tenantName) {
+        $stmt = $this->conn->prepare("SELECT id FROM tenant WHERE name = ?");
+        $stmt->bind_param("s", $tenantName);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows;
+        $stmt->close();
+
+        return $count > 0;
+    }
 
       private function doRegistrationTenant($tenantName, $tenantAddress, $tenantPhone, $photoName, $userId) {
             $query = "INSERT INTO tenant (user_id, name, address, photo, phone) VALUES (?, ?, ?, ?, ?)";
