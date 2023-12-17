@@ -4,6 +4,11 @@
 
 	Helper::xFrameRemove();
 ?>
+<?php 
+    session_start();
+    // Generate a token
+    $_SESSION['csrf-token'] = bin2hex(random_bytes(32)); 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -60,6 +65,7 @@
 			<br>
 			<div class="cf-turnstile" data-sitekey="0x4AAAAAAANj8c6gD3Mangzj" data-theme="light" data-callback="onSuccess"></div>
 			<br>
+			<input type="hidden" name="csrf-token" value="<?=$_SESSION['csrf-token']?>">
 			<input id="button" type="submit" value="Submit" name="submit" disabled="true">
 			<br><br>
 			<!-- <a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a> -->

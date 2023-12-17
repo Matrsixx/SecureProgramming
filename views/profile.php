@@ -7,7 +7,7 @@
       include_once "../models/User.php";
       include_once "../config/database.php";   
       include_once "../utils/helper.php";
-
+      $_SESSION['csrf-token'] = bin2hex(random_bytes(32)); //csrf token
       Helper::xFrameRemove();
       
       $x = new Encrypt();
@@ -30,6 +30,8 @@
       $email = $user->getEmail();
       $photo = $user->getPhoto();
 	?>
+
+
 	<title>Dry-It! | Profile</title>
 	<link rel="stylesheet" type="text/css" href="../styles/profile.css">
   <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/524461320314028052/1090665780112261120/LogoSEcropped.png" type="image/x-icon">
@@ -54,6 +56,7 @@
           <label for="profile-photo">Upload Profile Photo:</label>
           <input type="file" name="profile-photo" id="profile-photo" accept="image/*">
           <br><br>
+          <input type="hidden" name="csrf-token" value="<?=$_SESSION['csrf-token']?>">
           <input id="button" type="submit" value="Update Profile Photo" name="submit">
           <br><br>
           <?php

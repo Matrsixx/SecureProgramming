@@ -7,7 +7,7 @@
     include_once '../utils/helper.php';
 
     Helper::xFrameRemove();
-
+    
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Location: ../index.php');
         exit();

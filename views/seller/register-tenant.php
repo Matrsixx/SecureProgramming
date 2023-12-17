@@ -36,6 +36,12 @@
 			} 
 		?>
 
+		<?php 
+				session_start();
+				// Generate a token
+				$_SESSION['csrf-token'] = bin2hex(random_bytes(32)); 
+		?>
+
 		<form action="../../actions/doRegisterTenant.php" method="POST" enctype="multipart/form-data">
 			<div class="user-box">
 				<input type="text" name="tenant-name" required="">
@@ -53,6 +59,7 @@
 					<label>Photo</label>
           <input type="file" name="tenant-photo">
       </div>
+	  		<input type="hidden" name="csrf-token" value="<?=$_SESSION['csrf-token']?>">
 			<input id="button" type="submit" value="Submit" name="submit">
 		</form>
 	</div>

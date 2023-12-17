@@ -20,6 +20,7 @@
         include "../utils/encrypt.php";
         
         session_start();
+        $_SESSION['csrf-token'] = bin2hex(random_bytes(32)); 
         $x = new Encrypt();
         $decodedData = $x->decodeJWT($_SESSION['token']);
     
@@ -45,8 +46,9 @@
       ?>
 
       <form action="../actions/doTransaction.php" method="POST">
-        <button class="tablinks" id="lefttab" type="submit" value="Ongoing" name="ongoingsubmit"><h3>Ongoing Transaction</h3></button>
+        <button class="tablinks" id="lefttab" type="submit" value="Ongoing" name="ongoingsubmit"><h3>Ongoing Transaction</h3></button>  
         <button class="tablinks" id="righttab" type="submit" value="Past" name="pastsubmit"><h3>Past Transaction</h3></button>
+        <input type="hidden" name="csrf-token" value="<?=$_SESSION['csrf-token']?>">
       </form>
       <!-- <div id="tab1" class="tabcontent"> -->
         <div>

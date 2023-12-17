@@ -5,12 +5,24 @@
     require_once "LaundryController.php";
     require_once "../utils/helper.php";
 
+    session_start();
+
     Helper::xFrameRemove();
 
-    session_start();   
+   
     $conn = Database::getInstance()->getConnection();
      
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        if (!isset($_SESSION['csrf-token'])) {
+            echo "Invalid token";
+            die();
+            
+        }else if($_POST['csrf-token'] !== $_SESSION['csrf-token']){
+            echo "Invalid token";
+            die();      
+        }
+
         $user_id_jwt = Encrypt::decodeJWT($_SESSION['token'])->user_id;
         $user_id = $_POST['user_id'];
 
@@ -19,7 +31,6 @@
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             die();
         }
-
 
         $order_list = $_POST['order_list'];
         $tenant_id = $_POST['tenant_id'];

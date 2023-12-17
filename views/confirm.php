@@ -4,6 +4,12 @@
     Helper::xFrameRemove();
 ?>
 
+<?php 
+        session_start();
+        // Generate a token
+        $_SESSION['csrf-token'] = bin2hex(random_bytes(32)); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,9 +105,9 @@
             <input type="hidden" name="tenant_id" value="<?php echo $tenant_id; ?>">
 
             <input type="hidden" name="order_list" value="<?php echo $_GET['orderlist']; ?>">
-
+            <input type="hidden" name="csrf-token" value="<?=$_SESSION['csrf-token']?>">
             <button type="submit" value="submit" name="submit" id="s">Check Out</button>
-
+            
         </form>
         
 
