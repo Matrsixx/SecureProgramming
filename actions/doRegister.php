@@ -14,6 +14,16 @@
         exit();
     }
 
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }else if($_SESSION['csrf_token'] !== $_POST['csrf_token']){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }
+
     $user = RegistrationController::getInstance()->registerUser();
     // die(var_dump($user));
     if ($user) {

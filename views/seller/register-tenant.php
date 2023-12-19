@@ -1,5 +1,9 @@
 <?php
 		session_start();
+		
+		if(!isset($_SESSION['csrf_token'])){
+			$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+		}
 
 		require_once './../../utils/helper.php';
 
@@ -53,6 +57,7 @@
 					<label>Photo</label>
           <input type="file" name="tenant-photo">
       </div>
+			<input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
 			<input id="button" type="submit" value="Submit" name="submit">
 		</form>
 	</div>

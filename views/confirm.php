@@ -99,6 +99,7 @@
             <input type="hidden" name="tenant_id" value="<?php echo $tenant_id; ?>">
 
             <input type="hidden" name="order_list" value="<?php echo $_GET['orderlist']; ?>">
+            <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
 
             <button type="submit" value="submit" name="submit" id="s">Check Out</button>
 

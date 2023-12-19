@@ -46,6 +46,7 @@
 
       <form action="../actions/doTransaction.php" method="POST">
         <button class="tablinks" id="lefttab" type="submit" value="Ongoing" name="ongoingsubmit"><h3>Ongoing Transaction</h3></button>
+        <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
         <button class="tablinks" id="righttab" type="submit" value="Past" name="pastsubmit"><h3>Past Transaction</h3></button>
       </form>
       <!-- <div id="tab1" class="tabcontent"> -->

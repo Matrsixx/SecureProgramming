@@ -3,6 +3,10 @@
 
 		session_start();
 
+		if(!isset($_SESSION['csrf_token'])){
+			$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+		}
+
 		if (isset($_SESSION['token'])) {
 			$token = $_SESSION['token'];
 			$decodedToken = Encrypt::decodeJWT($token);
@@ -74,6 +78,7 @@
 						<option value="seller">Seller</option>
 				</select>
 			</div>
+			<input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
 			<input id="button" type="submit" value="Submit" name="submit">
 			<br><br>
 			<span>Already Have An Account? <a href="../index.php" class="forgot-button"><b>Login</b></a></span>

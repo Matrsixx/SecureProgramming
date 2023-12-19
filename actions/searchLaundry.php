@@ -12,6 +12,15 @@
         header('Location: ../views/home.php');
         exit();
     }
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }else if($_SESSION['csrf_token'] !== $_POST['csrf_token']){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }
 
     if (!isset($_GET['name'])) {
         $laundries = LaundryController::getInstance()->getLaundry();

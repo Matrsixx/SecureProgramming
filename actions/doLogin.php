@@ -13,6 +13,16 @@
         exit();
     }
 
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }else if($_SESSION['csrf_token'] !== $_POST['csrf_token']){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }
+
     if (AuthController::getInstance()->checkMaxAttempt($_SERVER['REMOTE_ADDR'])) {
         $_SESSION['error'] = "Too Many Login Attempt!<br>Please Try Again Later!";
         header('Location: ../index.php');

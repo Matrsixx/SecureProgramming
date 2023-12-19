@@ -56,6 +56,7 @@
           <br><br>
           <input id="button" type="submit" value="Update Profile Photo" name="submit">
           <br><br>
+          <input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
           <?php
             if (isset($_SESSION['error'])) {
               $error = $_SESSION['error'];

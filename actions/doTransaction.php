@@ -13,6 +13,16 @@
         exit();
     }
 
+    if(!isset($_SESSION['csrf_token'])){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }else if($_SESSION['csrf_token'] !== $_POST['csrf_token']){
+        $_SESSION['error'] = "Authorization Error";
+        header('Location: ../index.php');
+        die();
+    }
+
     $x = new Encrypt();
     $decodedData = $x->decodeJWT($_SESSION['token']);
     $id = $decodedData->user_id;

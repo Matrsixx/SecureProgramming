@@ -1,5 +1,6 @@
 <?php
-
+	session_start();
+	$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 	require_once './utils/helper.php';
 
 	Helper::xFrameRemove();
@@ -18,9 +19,9 @@
 		<img src="https://cdn.discordapp.com/attachments/524461320314028052/1090665918171971675/Dry-It_Logo_Cadangan_cropped.png" alt="logo" srcset="" class="avatar">
 		<h2>Login</h2>
 		<?php
-			require_once './utils/encrypt.php';
+			require_once './utils/encrypt.php';	
 			
-			session_start();
+			
 
 			if (isset($_SESSION['token'])) {
 				$token = $_SESSION['token'];
@@ -60,6 +61,8 @@
 			<br>
 			<div class="cf-turnstile" data-sitekey="0x4AAAAAAANj8c6gD3Mangzj" data-theme="light" data-callback="onSuccess"></div>
 			<br>
+			<input type="hidden" name="csrf_token" value=<?php echo $_SESSION['csrf_token'] ?>>
+
 			<input id="button" type="submit" value="Submit" name="submit" disabled="true">
 			<br><br>
 			<!-- <a href="/views/forgot-password.php" class="forgot-button"><b>Forgot Password?</b></a> -->
