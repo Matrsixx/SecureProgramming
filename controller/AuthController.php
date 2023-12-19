@@ -4,8 +4,6 @@
     require_once './../utils/helper.php';
 
     Helper::xFrameRemove();
-
-    session_start();
     
     Class AuthController {
         private static $instance = null;
